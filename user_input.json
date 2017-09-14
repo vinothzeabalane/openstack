@@ -1,0 +1,65 @@
+{
+	"setup1": {
+		"replace": {
+			"SET_PASSWORD": "root123",
+			"NTP_IP": "10.161.113.0/24",
+			"SDB": "sdb1",
+			"GATEWAY_IP": "10.161.113.129",
+			"DNS_IP": "8.8.8.8",
+			"SUBNET_IP": "10.161.113.128/26",
+			"POOL_START": "10.161.113.152",
+			"POOL_END": "10.161.113.155",
+			"SELF_GATEWAY": "20.20.20.1",
+			"SELF_SUBNET": "20.20.20.0/24",
+			"controller":"10.161.113.177"
+			},
+		"host": {
+			"controller01": "10.161.113.177",
+			"compute01": "10.161.113.178",
+			"compute02": "10.161.113.179",
+			"storage01": "10.161.113.180"
+		}
+	},
+	"setup2": {
+		"replace": {
+			"SET_PASSWORD": "root123",
+			"NTP_IP": "10.161.113.0/24",
+			"SDB": "sdb1",
+			"GATEWAY_IP": "10.161.113.129",
+			"DNS_IP": "8.8.8.8",
+			"SUBNET_IP": "10.161.113.128/26",
+			"POOL_START": "10.161.113.140",
+			"POOL_END": "10.161.113.148",
+			"SELF_GATEWAY": "20.20.20.1",
+			"SELF_SUBNET": "20.20.20.0/24",
+			"controller":"10.161.113.182"
+		},
+		"host": {
+			"controller02": "10.161.113.182",
+			"compute03": "10.161.113.183",
+			"compute04": "10.161.113.184",
+			"storage02": "10.161.113.174"
+		}
+	},
+	"setup3": {
+		"replace": {
+			"SET_PASSWORD": "root123",
+			"NTP_IP": "10.161.113.0/24",
+			"SDB": "sdb1",
+			"GATEWAY_IP": "10.161.113.129",
+			"DNS_IP": "8.8.8.8",
+			"SUBNET_IP": "10.161.113.128/26",
+			"POOL_START": "10.161.113.168",
+			"POOL_END": "10.161.113.171",
+			"SELF_GATEWAY": "10.10.10.1",
+			"SELF_SUBNET": "10.10.10.0/24",
+			"controller":"10.161.113.137"
+		},
+		"host": {
+			"controller": "10.161.113.137",
+			"compute05": "10.161.113.138",
+			"compute06": "10.161.113.139",
+			"storage03": "10.161.113.174"
+		}
+	}
+}
