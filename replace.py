@@ -58,7 +58,7 @@ class ReplaceScript:
                     for k in self.config.items(i):
                         if l in str(k[1]):
                             val= self.data[l]
-                            print("Expression changed as '%s'" % val)
+                            print("Expression changed as '%s'" % val) 
                             self.config1[i][k[0]] = self.config1[i][k[0]].replace(l,val)
                             self.config1.write()
         except Exception as e:
@@ -80,9 +80,9 @@ class ReplaceScript:
 
             
 if __name__ == "__main__":
-    ins = ReplaceScript(cmp='storage',env='setup1')
+    ins = ReplaceScript(cmp='controller',env='setup1')
 #     ins.comment("config_system.ini")
 #     ins.uncomment("config_system.ini")
-    ins.execute_replace('uncomment')
-#     ins.execute_replace()
+#     ins.execute_replace('uncomment')
+    ins.execute_replace()
     
