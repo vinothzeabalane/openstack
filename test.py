@@ -3,8 +3,7 @@ import configparser
 from configobj import ConfigObj
 import json
 
-from ConfigParser import SafeConfigParser
-import glob
+from configparser import SafeConfigParser
 import codecs
 import sys
 
@@ -38,7 +37,6 @@ class ReplaceScript:
                 
                 self.config1 = ConfigObj(os.getcwd()+'/%s/%s' %(self.comp,file))
                 
-                
                 if condition == 'uncomment':
                     self.uncomment()
                 else:
@@ -52,10 +50,10 @@ class ReplaceScript:
         parser = SafeConfigParser()
         parser.optionxform=str
 
-        with codecs.open('/opt/prakash/openstack/dashboard.ini', 'r', encoding='utf-8') as f:
+        with codecs.open('C:/Users/srajendran/Desktop/python_tutorial/openstack/dashboard.ini', 'r', encoding='utf-8') as f:
             parser.readfp(f)
         
-        fp = open('/opt/prakash/openstack/dashboard.ini', 'w')
+        fp = open('C:/Users/srajendran/Desktop/python_tutorial/openstack/dashboard.ini', 'w')
         
         for i in l1:
             
@@ -71,17 +69,12 @@ class ReplaceScript:
             self.config.optionxform=str
             self.config.read(os.getcwd()+'/%s/%s' %(self.comp,file))
             
-#             self.config1 = ConfigObj(os.getcwd()+'/%s/%s' %(self.comp,file))
-            
             for l in self.data.keys():
                 for i in self.config.sections():
                     for k in self.config.items(i):
                         if l in str(k[1]):
                             val= self.data[l]
-#                             print(i,self.config[i][k[0]], self.config[i][k[0]].replace(l,val))
-                            l1.append((i,self.config[i][k[0]], self.config[i][k[0]].replace(l,val)))
-#                             self.config1[i][k[0]] = self.config1[i][k[0]].replace(l,val)
-#                             self.config1.write()
+                            l1.append((i,k[0], self.config[i][k[0]].replace(l,val)))
             self.write1(l1)
         except Exception as e:
             if 'File contains no section headers.' in str(e):
