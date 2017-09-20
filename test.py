@@ -1,11 +1,15 @@
-import os  
-import configparser
-from configobj import ConfigObj
-import json
 
+
+from __future__ import print_function
+from configobj import ConfigObj
 from configparser import SafeConfigParser
 import codecs
 import sys
+import fileinput
+import os  
+import configparser
+
+import json
 
 
 class ReplaceScript:
@@ -29,36 +33,45 @@ class ReplaceScript:
         try:
             res =  os.listdir(os.getcwd()+'/%s' %self.comp)
             for file in res:
+                self.write1(file)
                 
-                print("Executing the file for %s" %file)
-                self.config = configparser.RawConfigParser()
-                self.config.optionxform=str
-                self.config.read(os.getcwd()+'/%s/%s' %(self.comp,file))
-                
-                self.config1 = ConfigObj(os.getcwd()+'/%s/%s' %(self.comp,file))
-                
-                if condition == 'uncomment':
-                    self.uncomment()
-                else:
-                    self.comment()
+#                 print("Executing the file for %s" %file)
+#                 self.config = configparser.RawConfigParser()
+#                 self.config.optionxform=str
+#                 self.config.read(os.getcwd()+'/%s/%s' %(self.comp,file))
+#                 
+#                 self.config1 = ConfigObj(os.getcwd()+'/%s/%s' %(self.comp,file))
+#                 
+#                 if condition == 'uncomment':
+#                     self.uncomment()
+#                 else:
+#                     self.comment()
            
         except Exception as e:
             print(e)
                 
-    def write1(self,l1):
-        
-        parser = SafeConfigParser()
-        parser.optionxform=str
-
-        with codecs.open('C:/Users/srajendran/Desktop/python_tutorial/openstack/dashboard.ini', 'r', encoding='utf-8') as f:
-            parser.readfp(f)
-        
-        fp = open('C:/Users/srajendran/Desktop/python_tutorial/openstack/dashboard.ini', 'w')
-        
-        for i in l1:
+    def write1(self,file):
+        res = ''
+        k1=[]
+        try:
+            with fileinput.FileInput(os.getcwd()+'/%s/%s' %(self.comp,file), inplace=True, backup=None) as file:
+                for line in file:
+                    for i in self.data.keys():
+                        if i in line:
+                            k1.append(i)
+                    for m in k1:
+                        if res:
+                            res = (res.replace(m,self.data[m]))
+                        else:
+                            res = (line.replace(m,self.data[m]))
+                    if res:
+                        print(res,end='')
+                        res = ''
+                    else:
+                        print(line,end='')
             
-            parser.set(i[0], i[1], i[2])
-        parser.write(fp)
+        except Exception as e:
+            print(e)
         
         
     def uncomment(self,file=None):
@@ -98,9 +111,10 @@ class ReplaceScript:
 
             
 if __name__ == "__main__":
-    ins = ReplaceScript(cmp='controller',env='setup1')
+    ins = ReplaceScript(cmp='compute',env='setup1')
+#     ins.write1()
 #     ins.comment("config_system.ini")
-    ins.uncomment("dashboard.ini")
-#     ins.execute_replace('uncomment')
+#     ins.uncomment("dashboard.ini")
+    ins.execute_replace('uncomment')
 #     ins.execute_replace()
     
