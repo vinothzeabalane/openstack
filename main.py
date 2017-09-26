@@ -70,7 +70,7 @@ class OpenStack:
                             os.environ[m[0]]= m[1]
                     else:
                         print("Executing the cmd: %s" %k[1])
-                        os.system(k[1].replace("'''",""))
+                        os.system(k[1])
             
         except Exception as e:
             print(e)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     ins = OpenStack(args.component)
     rep = replace.ReplaceScript(args.component,args.env)
-    rep.execute_replace('uncomment')
-#     ins.read_config_file()
+#     rep.execute_replace('uncomment')
+    ins.read_config_file()
 #     rep.execute_replace()
     
